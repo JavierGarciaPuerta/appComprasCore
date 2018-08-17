@@ -13,7 +13,6 @@ import com.ust.angular.appCompras.services.IFacturaService;
 @Service
 public class FacturaServiceImpl implements IFacturaService {
 	
-	
 	private IFacturaRepository iFacturaRepository;
 	
 	@Autowired
@@ -34,6 +33,11 @@ public class FacturaServiceImpl implements IFacturaService {
 	@Override
 	public Optional<Factura> getFactura(String id) {
 		return iFacturaRepository.findById(id);
+	}
+	
+	@Override
+	public void deleteFactura(String id) {
+		iFacturaRepository.deleteById(id);
 	}
 
 }
