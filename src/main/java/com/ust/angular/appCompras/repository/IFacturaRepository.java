@@ -16,6 +16,6 @@ public interface IFacturaRepository extends MongoRepository<Factura, String> {
 	
 	Optional<Factura> findById(String id);
 	
-	void deleteById(String id);
+	void delete(Factura factura);
 	
 }

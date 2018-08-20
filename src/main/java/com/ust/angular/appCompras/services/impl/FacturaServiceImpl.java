@@ -36,8 +36,9 @@ public class FacturaServiceImpl implements IFacturaService {
 	}
 	
 	@Override
-	public void deleteFactura(String id) {
-		iFacturaRepository.deleteById(id);
+	public void deleteFactura(Factura factura) {
+		System.out.println("factura=>"+factura.getNombre());
+		iFacturaRepository.delete(factura);
 	}
 
 }

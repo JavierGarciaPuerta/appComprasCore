@@ -13,6 +13,6 @@ public interface IFacturaService {
 	
 	Optional<Factura> getFactura(String id);
 	
-	void deleteFactura(String id);
+	void deleteFactura(Factura factura);
 	
 }

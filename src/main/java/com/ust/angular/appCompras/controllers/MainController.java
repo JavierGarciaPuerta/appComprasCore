@@ -61,10 +61,10 @@ public class MainController {
 	@CrossOrigin()
 	@ApiOperation(value = "delete a bill resource", response = Factura.class, nickname = "resumeBill", httpMethod = "DELETE", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
 	@ApiResponses({ @ApiResponse(code = 201, message = "delete a bill resource") })
-	@DeleteMapping("/bill/{id}")
-	public void deleteFactura(@ApiParam(value="ID bill to delete") @PathVariable(required=true) final String id) {
+	@DeleteMapping("/bill/delete")
+	public void deleteFactura(@RequestBody Factura factura) {
 		System.out.println("deleteFactura");
-		iFacturaService.deleteFactura(id);
+		iFacturaService.deleteFactura(factura);
 	}
 	
 	
