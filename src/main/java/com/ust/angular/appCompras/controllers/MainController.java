@@ -63,6 +63,7 @@ public class MainController {
 	@ApiResponses({ @ApiResponse(code = 201, message = "delete a bill resource") })
 	@DeleteMapping("/bill/{id}")
 	public void deleteFactura(@ApiParam(value="ID bill to delete") @PathVariable(required=true) final String id) {
+		System.out.println("deleteFactura");
 		iFacturaService.deleteFactura(id);
 	}
 	
