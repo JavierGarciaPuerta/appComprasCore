@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.ust.angular.appCompras.resources.Factura;
 
+// MongoRepository use Spring Data MongoDB
 public interface IFacturaRepository extends MongoRepository<Factura, String> {
 	
 	@SuppressWarnings("unchecked")
@@ -16,6 +17,6 @@ public interface IFacturaRepository extends MongoRepository<Factura, String> {
 	
 	Optional<Factura> findById(String id);
 	
-	void delete(Factura factura);
+	void deleteById(String id);
 	
 }

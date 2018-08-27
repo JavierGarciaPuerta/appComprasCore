@@ -19,7 +19,7 @@ public class SwaggerConfig {
             .select()
             .apis(RequestHandlerSelectors.any())
             .paths(PathSelectors.any())
-            .paths(PathSelectors.regex("/bill.*"))
+            .paths(PathSelectors.regex("/factura.*"))
             .build();
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +38,7 @@ public class MainController {
 	@CrossOrigin()
 	@ApiOperation(value = "create a bill resource", response = Factura.class, nickname = "createBill", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
 	@ApiResponses({ @ApiResponse(code = 201, message = "create a bill resource") })
-	@PostMapping("/bill/add")
+	@PostMapping("/factura")
 	public ResponseEntity<Factura> addFacturas(@RequestBody Factura factura) {
 		return ResponseEntity.ok(iFacturaService.saveFactura(factura));
 	}
@@ -45,7 +46,7 @@ public class MainController {
 	@CrossOrigin()
 	@ApiOperation(value = "list bill resource", response = Factura.class, nickname = "resumeListBill", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
 	@ApiResponses({ @ApiResponse(code = 201, message = "list bill resource") })
-	@GetMapping("/bill/list")
+	@GetMapping("/factura")
 	public ResponseEntity<List<Factura>> getFacturas() {
 		return ResponseEntity.ok(iFacturaService.getFacturas());
 	}
@@ -53,7 +54,7 @@ public class MainController {
 	@CrossOrigin()
 	@ApiOperation(value = "bill resource", response = Factura.class, nickname = "resumeBill", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
 	@ApiResponses({ @ApiResponse(code = 201, message = "bill resource") })
-	@GetMapping("/bill/{id}")
+	@GetMapping("/factura/{id}")
 	public ResponseEntity<Optional<Factura>> getFactura(@ApiParam(value="ID bill to delete") @PathVariable(required=true) final String id) {
 		return ResponseEntity.ok(iFacturaService.getFactura(id));
 	}
@@ -61,10 +62,27 @@ public class MainController {
 	@CrossOrigin()
 	@ApiOperation(value = "delete a bill resource", response = Factura.class, nickname = "resumeBill", httpMethod = "DELETE", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
 	@ApiResponses({ @ApiResponse(code = 201, message = "delete a bill resource") })
-	@DeleteMapping("/bill/delete")
-	public void deleteFactura(@RequestBody Factura factura) {
+	@DeleteMapping("/factura/{id}")
+	public void deleteFactura(@ApiParam(value="Id bill to delete") @PathVariable(required=true) final String id) {
 		System.out.println("deleteFactura");
-		iFacturaService.deleteFactura(factura);
+		iFacturaService.deleteFactura(id);
+	}
+	
+	@CrossOrigin()
+	@ApiOperation(value = "get max bill resource", response = Factura.class, nickname = "getmaxBill", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
+	@ApiResponses({ @ApiResponse(code = 201, message = "get max bill resource") })
+	@GetMapping("/factura/ultima")
+	public ResponseEntity<Factura> getMaxFactId() {
+		return ResponseEntity.ok(iFacturaService.getMaxFactId());
+	}
+	
+	@CrossOrigin()
+	@ApiOperation(value = "update bill resource", response = Factura.class, nickname = "updateBill", httpMethod = "PUT", produces = MediaType.APPLICATION_JSON_VALUE, tags= {"factura"})
+	@ApiResponses({ @ApiResponse(code = 201, message = "update bill resource") })
+	@PutMapping("/factura/{nombre}/{proveedor}")
+	public long updateFactura(@ApiParam(value="Name bill to update") @PathVariable(required=true) final String nombre, 
+			@ApiParam(value="Provider bill to update") @PathVariable(required=true) final String proveedor) {
+		return iFacturaService.updateFactura(nombre, proveedor);
 	}
 	
 	

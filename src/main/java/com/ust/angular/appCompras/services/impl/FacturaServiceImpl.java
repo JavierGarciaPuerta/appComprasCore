@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ust.angular.appCompras.repository.IFacturaRepository;
+import com.ust.angular.appCompras.repository.IFacturaRepositoryCustom;
 import com.ust.angular.appCompras.resources.Factura;
 import com.ust.angular.appCompras.services.IFacturaService;
 
@@ -15,9 +16,12 @@ public class FacturaServiceImpl implements IFacturaService {
 	
 	private IFacturaRepository iFacturaRepository;
 	
+	private IFacturaRepositoryCustom iFacutraRepositoryCustom;
+	
 	@Autowired
-	private void facturaServiceImpl(IFacturaRepository facturaRepository) {
+	private void facturaServiceImpl(IFacturaRepository facturaRepository, IFacturaRepositoryCustom facutraRepositoryCustom) {
 		this.iFacturaRepository = facturaRepository;
+		this.iFacutraRepositoryCustom =  facutraRepositoryCustom;
 	}
 	
 	@Override
@@ -36,9 +40,18 @@ public class FacturaServiceImpl implements IFacturaService {
 	}
 	
 	@Override
-	public void deleteFactura(Factura factura) {
-		System.out.println("factura=>"+factura.getNombre());
-		iFacturaRepository.delete(factura);
+	public void deleteFactura(String id) {
+		iFacturaRepository.deleteById(id);
+	}
+
+	@Override
+	public Factura getMaxFactId() {
+		return iFacutraRepositoryCustom.getMaxFactId();
+	}
+
+	@Override
+	public long updateFactura(String nombre, String proveedor) {
+		return iFacutraRepositoryCustom.updateFactura(nombre, proveedor);
 	}
 
 }

@@ -1,11 +1,14 @@
 package com.ust.angular.appCompras.resources;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 public class Factura {
 	
 	@Id
 	private String id; // The id is mostly for internal use by MongoDB
+	
+	@Indexed
 	private String nombre;
 	private float precio;
 	private String iva;
@@ -23,6 +26,9 @@ public class Factura {
 		
 	}
 
+	public String getId() {
+		return id;
+	}
 
 	public String getNombre() {
 		return nombre;
